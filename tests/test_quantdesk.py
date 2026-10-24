@@ -1,3 +1,9 @@
+import os
+import sys
+
+# Let this file run on its own (e.g. "Run file" in Spyder) as well as under pytest.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import numpy as np
 import pytest
 from quantdesk import *
@@ -158,3 +164,7 @@ def test_backtest_detects_pump_and_rejects_no_pump():
     assert with_pump["mean_R"] > no_pump["mean_R"] + 0.05
     assert no_pump["mean_R"] < 0.0          # costs + theta: no edge means a loss
     assert with_pump["mean_R_ci95"][0] > no_pump["mean_R_ci95"][0]
+
+
+if __name__ == "__main__":
+    sys.exit(pytest.main([__file__, "-q"]))

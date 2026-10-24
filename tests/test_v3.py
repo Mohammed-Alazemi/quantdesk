@@ -1,4 +1,10 @@
 """Tests for the v3 modules. Every test checks the code against an exact or published result."""
+import os
+import sys
+
+# Let this file run on its own (e.g. "Run file" in Spyder) as well as under pytest.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import numpy as np
 import pytest
 from scipy.stats import lognorm
@@ -220,3 +226,7 @@ def test_avellaneda_stoikov_reproduces_published_comparison():
     assert inv["std_pnl"] < 0.6 * sym["std_pnl"]
     assert inv["std_q"] < 0.5 * sym["std_q"]
     assert 55 < inv["mean_pnl"] < sym["mean_pnl"] < 75
+
+
+if __name__ == "__main__":
+    sys.exit(pytest.main([__file__, "-q"]))
