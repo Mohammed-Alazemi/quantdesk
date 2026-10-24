@@ -11,11 +11,11 @@ An options research desk written from first principles in NumPy, SciPy and panda
 - position sizing and backtesting with honest statistics;
 - inventory-aware market making.
 
-**Every module is tested against an exact or published result: 43 tests, about 11 seconds.**
+**Every module is tested against an exact or published result: 44 tests, about 11 seconds.**
 
 ```bash
 pip install -r requirements.txt
-python -m pytest -q                 # 43 tests
+python -m pytest -q                 # 44 tests
 python -m quantdesk research        # the experiments below, in about 2 seconds
 python -m quantdesk demo            # verdict-first trade report + universe backtest
 python -m quantdesk analyze --csv closes.csv --strike 100 --iv 0.32 --dte 60 --hold 30 --earnings 75
@@ -25,7 +25,7 @@ python -m quantdesk analyze --csv closes.csv --strike 100 --iv 0.32 --dte 60 --h
 
 1. Unzip or clone the project first. Python cannot import the package from inside a `.zip` file that your editor opened.
 2. Install the requirements once: `pip install -r requirements.txt`. In Spyder's console, use `%pip install pytest` (numpy, scipy and pandas are usually already installed).
-3. Open and run `quickstart.py` to see every experiment, or `run_tests.py` to run all 43 tests. Each test file also runs on its own.
+3. Open `tutorial.py` and run it one cell at a time (Shift+Enter in Spyder). It walks through pricing, implied vol, a full trade report on your own price history, spreads, earnings event vol, hedging, Heston calibration and checking your own track record. `quickstart.py` runs every experiment and `run_tests.py` runs all 44 tests.
 
 ## What it shows
 
