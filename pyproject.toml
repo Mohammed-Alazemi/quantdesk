@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantdesk"
+version = "3.0.0"
+description = "Options research desk: pricing, Heston calibration, delta hedging, risk-neutral densities, honest backtest statistics and market making."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Mohammed Alazemi"}]
+dependencies = ["numpy>=1.24", "scipy>=1.10", "pandas>=2.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+live = ["yfinance"]
+
+[project.scripts]
+quantdesk = "quantdesk.cli:main"
+
+[tool.setuptools]
+packages = ["quantdesk"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
