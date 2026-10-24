@@ -228,5 +228,20 @@ def test_avellaneda_stoikov_reproduces_published_comparison():
     assert 55 < inv["mean_pnl"] < sym["mean_pnl"] < 75
 
 
+# ------------------------------------------------------------------ data loading
+def test_load_closes_reads_yahoo_format_not_volume(tmp_path):
+    from quantdesk.data import load_closes
+    import pandas as pd
+    dates = pd.bdate_range("2025-01-01", periods=100)
+    close = np.linspace(100, 120, 100)
+    df = pd.DataFrame({"Date": dates[::-1].strftime("%Y-%m-%d"), "Open": close[::-1], "High": close[::-1],
+                       "Low": close[::-1], "Close": close[::-1], "Adj Close": close[::-1] * 0.99,
+                       "Volume": np.full(100, 5_000_000)})          # newest first, like some exports
+    f = tmp_path / "yahoo.csv"
+    df.to_csv(f, index=False)
+    out = load_closes(f)
+    assert np.allclose(out, close * 0.99)                           # adjusted, oldest first, not volume
+
+
 if __name__ == "__main__":
     sys.exit(pytest.main([__file__, "-q"]))
