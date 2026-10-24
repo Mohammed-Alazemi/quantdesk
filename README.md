@@ -1,5 +1,7 @@
 # quantdesk
 
+[![tests](https://github.com/Mohammed-Alazemi/quantdesk/actions/workflows/tests.yml/badge.svg)](https://github.com/Mohammed-Alazemi/quantdesk/actions/workflows/tests.yml)
+
 An options research desk written from first principles in NumPy, SciPy and pandas. It covers:
 
 - pricing and Greeks;
