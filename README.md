@@ -15,7 +15,7 @@ An options research desk written from first principles in NumPy, SciPy and panda
 
 ## Quick start: one file, no install
 
-Download **[`quantdesk_app.py`](quantdesk_app.py)**, open it in Spyder (or VS Code), type your trade into the `YOUR TRADE` block at the top and press **F5**. The whole package is packed inside the file, so there is nothing to unzip or install beyond numpy, scipy and pandas.
+Download **[`quantdesk_app.py`](quantdesk_app.py)**, open it in Spyder (or VS Code), type your trade into the inputs at the top and press **F5**. The whole package is packed inside the file, so there is nothing to unzip or install beyond numpy, scipy and pandas.
 
 It prints nine sections: price and Greeks, implied vol, realised vol and a GARCH forecast, the verdict-first trade check, a spread versus the naked call with a stress grid, the earnings move and IV crush, a delta-hedging experiment, a Heston smile fit and a skill-or-luck check of your own track record. To use real prices, download a Yahoo Finance "Historical Data" CSV, put it next to the file and set `PRICE_HISTORY_CSV = "TICKER.csv"`.
 
