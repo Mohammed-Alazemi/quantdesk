@@ -21,6 +21,12 @@ python -m quantdesk demo            # verdict-first trade report + universe back
 python -m quantdesk analyze --csv closes.csv --strike 100 --iv 0.32 --dte 60 --hold 30 --earnings 75
 ```
 
+**Using an editor such as Spyder or VS Code instead of a terminal?**
+
+1. Unzip or clone the project first. Python cannot import the package from inside a `.zip` file that your editor opened.
+2. Install the requirements once: `pip install -r requirements.txt`. In Spyder's console, use `%pip install pytest` (numpy, scipy and pandas are usually already installed).
+3. Open and run `quickstart.py` to see every experiment, or `run_tests.py` to run all 43 tests. Each test file also runs on its own.
+
 ## What it shows
 
 **1. Heston calibration.** The model is calibrated to a noisy implied-volatility surface: 45 quotes across 5 expiries, with 0.2 vol points of noise.
