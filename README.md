@@ -13,19 +13,24 @@ An options research desk written from first principles in NumPy, SciPy and panda
 
 **Every module is tested against an exact or published result: 44 tests, about 11 seconds.**
 
+## Quick start: one file, no install
+
+Download **[`quantdesk_app.py`](quantdesk_app.py)**, open it in Spyder (or VS Code), type your trade into the `YOUR TRADE` block at the top and press **F5**. The whole package is packed inside the file, so there is nothing to unzip or install beyond numpy, scipy and pandas.
+
+It prints nine sections: price and Greeks, implied vol, realised vol and a GARCH forecast, the verdict-first trade check, a spread versus the naked call with a stress grid, the earnings move and IV crush, a delta-hedging experiment, a Heston smile fit and a skill-or-luck check of your own track record. To use real prices, download a Yahoo Finance "Historical Data" CSV, put it next to the file and set `PRICE_HISTORY_CSV = "TICKER.csv"`.
+
+## For developers
+
 ```bash
 pip install -r requirements.txt
 python -m pytest -q                 # 44 tests
 python -m quantdesk research        # the experiments below, in about 2 seconds
 python -m quantdesk demo            # verdict-first trade report + universe backtest
 python -m quantdesk analyze --csv closes.csv --strike 100 --iv 0.32 --dte 60 --hold 30 --earnings 75
+python tools/build_app.py           # rebuild quantdesk_app.py after changing the package
 ```
 
-**Using an editor such as Spyder or VS Code instead of a terminal?**
-
-1. Unzip or clone the project first. Python cannot import the package from inside a `.zip` file that your editor opened.
-2. Install the requirements once: `pip install -r requirements.txt`. In Spyder's console, use `%pip install pytest` (numpy, scipy and pandas are usually already installed).
-3. Open `tutorial.py` and run it one cell at a time (Shift+Enter in Spyder). It walks through pricing, implied vol, a full trade report on your own price history, spreads, earnings event vol, hedging, Heston calibration and checking your own track record. `quickstart.py` runs every experiment and `run_tests.py` runs all 44 tests.
+CI runs the tests on Python 3.10 and 3.12, checks that `quantdesk_app.py` matches the package, and runs it end to end. The maths and results are written up in the paper: **[paper/Alazemi_quantdesk_paper.pdf](paper/Alazemi_quantdesk_paper.pdf)** (LaTeX source in `paper/`).
 
 ## What it shows
 
