@@ -144,7 +144,8 @@ def main(argv=None):
         _backtest(args.pump, args.tickers)
     else:
         if args.csv:
-            prices = np.loadtxt(args.csv, delimiter=",", skiprows=1, usecols=-1)
+            from .data import load_closes
+            prices = load_closes(args.csv)
             K, iv, earn = args.strike, args.iv, args.earnings
             if K is None or iv is None:
                 raise SystemExit("--csv mode needs --strike and --iv")

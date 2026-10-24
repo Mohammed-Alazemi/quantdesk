@@ -12,6 +12,33 @@ def _yf():
         raise RuntimeError("pip install yfinance to use live data") from e
 
 
+def load_closes(path):
+    """Daily closes from a CSV file, oldest first.
+
+    Works with a Yahoo Finance "Historical data" download (Date, Open, High, Low, Close,
+    Adj Close, Volume) and with simple two-column files (Date, Close). Uses "Adj Close" when
+    present (splits and dividends adjusted), otherwise "Close", otherwise the only numeric column.
+    """
+    import pandas as pd
+    df = pd.read_csv(path)
+    cols = {c.strip().lower(): c for c in df.columns}
+    for name in ("adj close", "adj_close", "adjclose", "close", "price"):
+        if name in cols:
+            col = cols[name]
+            break
+    else:
+        numeric = df.select_dtypes("number").columns
+        if len(numeric) != 1:
+            raise ValueError(f"Could not tell which column is the price in {path}: {list(df.columns)}")
+        col = numeric[0]
+    if "date" in cols:
+        df = df.sort_values(cols["date"], key=lambda d: pd.to_datetime(d, errors="coerce"))
+    prices = pd.to_numeric(df[col], errors="coerce").dropna().to_numpy(float)
+    if len(prices) < 60:
+        raise ValueError(f"Only {len(prices)} prices in {path}; download at least a year of daily data.")
+    return prices
+
+
 def get_prices(ticker, period="3y"):
     h = _yf().Ticker(ticker).history(period=period, auto_adjust=True)
     if h.empty:
